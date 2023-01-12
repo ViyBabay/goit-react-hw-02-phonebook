@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { ContactList } from './ContactList/ContactList';
+// import { nanoid } from 'nanoid'
 
 export class App extends Component {
   state = {
@@ -8,22 +10,22 @@ export class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    filter: '',
+    // filter: '',
     name: '',
-    number: '',
+    // number: '',
   };
+
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId)
+    }));
+}
+
+
   render() {
+    const { contacts } = this.state;
     return (
-      <div
-      // style={{
-      //  height: '100vh',
-      //  display: 'flex',
-      //  justifyContent: 'center',
-      //  alignItems: 'center',
-      //  fontSize: 40,
-      //  color: '#010101'
-      // }}
-      >
+      <div>
         <h2>PhoneBook</h2>
         <form>
           <p>Name</p>
@@ -43,8 +45,17 @@ export class App extends Component {
             required
           />
           <button type="button">Add contact</button>
-          <h3>Contacts</h3>
         </form>
+        <h3>Contacts</h3>
+        {/* <ul>
+      {this.state.contacts.map(({ id, name, number }) => (
+        <li key={id}>
+          {name}: {number}
+          <button onClick={() => this.deleteContact(id)}>Delete</button>
+        </li>
+      ))}
+    </ul> */}
+        <ContactList contacts={contacts} onDeleteContact={this.deleteContact}/>
       </div>
     );
   }
