@@ -1,5 +1,5 @@
 import React from 'react';
-// import { nanoid } from 'nanoid'
+// import PropTypes from 'prop-types';
 
 export const ContactList = ({ contacts, onDeleteContact }) => {
   return (
