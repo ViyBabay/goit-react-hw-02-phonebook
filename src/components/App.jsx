@@ -53,7 +53,7 @@ export class App extends Component {
   onAddContact = contactItem => {
     if (
       this.state.contacts.filter(
-        element => element.name.toLowerCase() === contactItem.name.toLowerCase()
+        elem => elem.name.toLowerCase() === contactItem.name.toLowerCase()
       ).length > 0
     ) {
       return alert(`${contactItem.name} is already in contacts`);
@@ -77,7 +77,7 @@ export class App extends Component {
         }}
       >
         <h1>PhoneBook</h1>
-        <ContactForm addContact={this.onAddContact} />
+        <ContactForm onSubmit={this.onAddContact} />
 
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.filterContact} />

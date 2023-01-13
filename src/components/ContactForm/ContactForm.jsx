@@ -23,7 +23,7 @@ export class ContactForm extends Component {
       name: this.state.name,
       number: this.state.number,
     };
-    this.props.onAddContact(contactInfo);
+    this.props.onSubmit(contactInfo);
     this.setState({
       name: '',
       number: '',
