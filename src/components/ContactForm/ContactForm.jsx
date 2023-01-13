@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
+import style from './ContactForm.module.css';
 
 export class ContactForm extends Component {
   state = {
@@ -16,43 +17,39 @@ export class ContactForm extends Component {
   };
 
   handleSubmit = evt => {
-      evt.preventDefault();
-      const contactInfo = {
+    evt.preventDefault();
+    const contactInfo = {
       id: nanoid(),
       name: this.state.name,
       number: this.state.number,
-      };
-      this.props.onAddContact(contactInfo);
-
-    console.log(this.state);
-      this.props.onSubmit(this.state);
-      this.reset();
-  };
-
-  reset = () => {
+    };
+    this.props.onAddContact(contactInfo);
     this.setState({
       name: '',
       number: '',
     });
   };
 
+  nameId = nanoid();
+
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name
+      <form onSubmit={this.handleSubmit} className={style.form}>
+        <label htmlFor={this.nameId} className={style.label}>
+          <p className={style.parag}>Name</p>
           <input
             type="text"
             name="name"
             value={this.state.name}
+            id={this.nameId}
             onChange={this.handleChange}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
           />
         </label>
-        <label>
-          Number
+        <label className={style.label}>
+          <p className={style.parag}>Number</p>
           <input
             type="tel"
             name="number"
@@ -63,8 +60,20 @@ export class ContactForm extends Component {
             required
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button type="submit" className={style.submit}>
+          Add contact
+        </button>
       </form>
     );
   }
 }
+
+ContactForm.propTypes = {
+  contactInfo: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+};
