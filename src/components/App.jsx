@@ -34,22 +34,6 @@ export class App extends Component {
     );
   };
 
-  // }
-
-  // onAddContact = contact => {
-  //   if (
-  //     this.state.contacts.filter(
-  //       element => element.name.toLowerCase() === contact.name.toLowerCase()
-  //     ).length > 0
-  //   ) {
-  //     return alert(`${contact.name} is already in contacts`);
-  //   }
-  //   this.setState(prevState => {
-  //     const arr = [...prevState.contacts, contact];
-  //     return { contacts: arr };
-  //   });
-  // };
-
   onAddContact = contactItem => {
     if (
       this.state.contacts.filter(
